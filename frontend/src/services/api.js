@@ -18,4 +18,23 @@ export const apiService = {
       throw error;
     }
   },
+
+  async sendChatMessage(message) {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: API_CONFIG.headers,
+        body: JSON.stringify({ message }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Chat request failed");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Chat Error:", error);
+      throw error;
+    }
+  },
 };

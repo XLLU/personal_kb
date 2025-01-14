@@ -4,7 +4,7 @@
   "description": "个人知识库系统",
   "scripts": {
     "frontend": "cd frontend && npm run dev",
-    "backend": "cd backend && python3 api/auth.py",
+    "backend": "cd backend && python3 app.py",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "devDependencies": {

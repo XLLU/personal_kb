@@ -20,5 +20,11 @@ if [ ! -d "frontend/node_modules" ]; then
     cd ..
 fi
 
+# 安装根目录依赖
+if [ ! -d "node_modules" ]; then
+    echo "Installing root dependencies..."
+    npm install
+fi
+
 # 启动应用
 npm run dev 

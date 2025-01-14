@@ -8,8 +8,7 @@
         {{ error }}
       </div>
       <div v-else>
-        <h2>欢迎使用知识库系统</h2>
-        <!-- 这里后续会添加上传和聊天组件 -->
+        <Chat />
       </div>
     </div>
   </div>
@@ -17,9 +16,13 @@
 
 <script>
 import { apiService } from './services/api';
+import Chat from './components/Chat.vue';
 
 export default {
   name: 'App',
+  components: {
+    Chat
+  },
   data() {
     return {
       error: null

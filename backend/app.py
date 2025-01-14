@@ -3,7 +3,7 @@ from flask_cors import CORS
 from functools import wraps
 import os
 from dotenv import load_dotenv
-from .chat import init_chat_routes  # 导入聊天路由初始化函数
+from api.chat import init_chat_routes
 
 # 加载环境变量
 load_dotenv()
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     if not VALID_API_KEYS or '' in VALID_API_KEYS:
         print("Warning: DEEPSEEK_API_KEY not set in environment variables")
     
-    app.run(debug=True, host='0.0.0.0', port=5001)  # 将端口改为 5001 
+    app.run(debug=True, host='0.0.0.0', port=5001) 
