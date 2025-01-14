@@ -1,0 +1,13 @@
+{
+  "name": "knowledge-base",
+  "version": "1.0.0",
+  "description": "个人知识库系统",
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && python3 api/auth.py",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
