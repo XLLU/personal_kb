@@ -7,6 +7,7 @@ from api.chat import init_chat_routes
 
 # 加载环境变量
 load_dotenv()
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 
 app = Flask(__name__)
 CORS(app)

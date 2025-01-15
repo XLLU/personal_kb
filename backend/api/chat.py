@@ -1,11 +1,16 @@
 from flask import jsonify, request
+import os
 import requests
-import json
 
 def init_chat_routes(app):
     @app.route('/api/chat', methods=['POST'])
     def chat():
         try:
+            DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+            if not DEEPSEEK_API_KEY:
+                return jsonify({"error": "API key not configured"}), 500
+                
+            # 获取请求数据
             data = request.get_json()
             if not data or 'message' not in data:
                 return jsonify({"error": "No message provided"}), 400
@@ -13,7 +18,7 @@ def init_chat_routes(app):
             # Deepseek API 配置
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {request.headers.get('X-API-Key')}"
+                "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
             }
 
             # 准备发送给 Deepseek 的数据
@@ -33,13 +38,15 @@ def init_chat_routes(app):
             )
 
             if response.status_code != 200:
-                return jsonify({"error": "Failed to get response from Deepseek"}), 500
+                error_message = f"DeepSeek API error: {response.text}"
+                print(error_message)
+                return jsonify({"error": error_message}), 500
 
             response_data = response.json()
             return jsonify({
                 "message": response_data['choices'][0]['message']['content']
             }), 200
-
+            
         except Exception as e:
-            print(f"Chat Error: {str(e)}")
-            return jsonify({"error": "Internal server error"}), 500 
+            print(f"Error in chat endpoint: {str(e)}")  # 添加错误日志
+            return jsonify({"error": str(e)}), 500 
